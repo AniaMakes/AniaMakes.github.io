@@ -1,0 +1,393 @@
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Vollkorn+SC&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vollkorn+SC&display=swap" rel="stylesheet"><link href="main.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images\favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="images\favicon-16x16.png" sizes="16x16" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<head>
+	<title>Modules 101 by Ania Bebb</title>
+</head>
+
+<body>
+	<div class="head">
+		<div class="top">
+		  <div class="page-title">
+			<h1 class="name-header">-- Ania Bebb -- </h1>
+		  </div>
+		  <div class="profile-links">
+			<div class="profile-link">
+			  <a href="https://github.com/AniaMakes"><img src="images\github-logo.png" alt="GitHub logo" height="50px"></a>
+			  <p>My GitHub Profile</p>
+			</div>
+			<div class="profile-link">
+			  <a href="https://uk.linkedin.com/in/annabebb"><img src="images\linkedin-logo.png" alt="LinkedIn logo" height="50px"></a>
+			  <p>My LinkedIn</p>
+			</div>
+			<div class="profile-link">
+				<a href="https://twitter.com/AniaMakes"><img src="images\twitter-logo.png" alt="Twitter logo" height="50px"></a>
+				<p>Twitter</p>
+			</div>
+		  </div>
+		</div>
+<hr>
+
+<div class="main-content-article">
+	<h1>
+		Modules 101: how and why of exporting and importing in JavaScript
+	</h1>
+	<p>Written in the Autumn 2018</p>
+<hr>
+<div class="writing">
+	<p>
+		Can you imagine finding the information you want if all of Wikipedia was on a single page? I can't either.
+	</p>
+	<p>
+		The same principle applies in programming. Rather than having one massive file with all the information, the application's code is divided into files and folders. They are structured in a way that enables newcomers to the codebase to easily find the information they are after. It also makes the codebase easier to maintain.	
+	</p>
+	<p>
+		In most module standards, JavaScript code is scoped to the file that holds it (the "origin" file). If we want to use that code elsewhere (in "destination" file), we need to explicitly export it from the origin file, and import it in the destination file. There are several ways to do it in JavaScript, the imports and export methods are not interchangeable, however! (Ok, you might be able to make it work, but it would be like trying to put a square peg in a round hole)		
+	</p>
+	<p>
+		This post will explain the different methods and provide examples. All the code here is available 
+		<a href="https://github.com/AniaMakes/basic-calculator">in this repo</a>
+		so that you can can see various approaches on the same code. Please note that the repo is only there to demonstrate the structure - don't expect the code there to work "as is". The specific paths mentioned in this article refer to the actual paths in the project. We'll be looking at: the basic four mathematics methods: additions, subtraction, multiplication, and division; how the functions can be arranged in a project; and how to import and export them so they are accessible from a single file.
+	</p>
+	<p>
+		This post will also explain, in a bit more depth, why it is important to use import and export functionality, and provide some historic background to why things are as they are now.
+	</p>
+
+	<h2>	
+		We will discuss possible structures first.
+	</h2>
+	<p>
+		<strong>All-in-one</strong> is, as the name implies, the structure where all the functions live in a single file. This isn't necessarily bad per se. If your project only has a couple of functions, there is no need to over-complicate things. Keep it simple.
+	</p>
+	<p>
+		<strong>Direct importing</strong> involves the functions being exported from their origin file, imported and used by the destination file. This structure is well suited to medium-small projects, especially where one function is considerably larger than the others.		
+	</p>
+	<p>
+		<strong>Indirect importing</strong> is used in medium to large projects where semantic separation into folders and sub-folders makes logical sense and helps, rather than hinders, to find the relevant code.
+	</p>
+	
+	<h2>
+		But WHY?
+	</h2>
+	<p>
+		Ok, Mx I'll-have-Wikipedia-on-one-page. Each to their own. However, if you are working as part of a group, there are a handful of concepts that are worth following. It will make your life easier in the long run, I promise.
+	</p>
+	<p>
+		The concept of <strong>separation of concerns</strong> is what it says on the tin. If you have a bunch of code that's responsible for the Thing, move it into a separate file so that you can reuse it easily. It improves clarity and makes it obvious that the Thing is being dealt with. It significantly reduces the likelihood that others (including future you) will waste time implementing functionality that already exists.
+	</p>
+	<p>
+		And that brings us to <strong>coupling</strong> and <strong>cohesion</strong>. Those terms are repeated again and again in Computer Science courses. Programmers are encouraged to aim for <strong>low coupling</strong> and <strong>high cohesion</strong> in their codebase. There are a multitude of articles explaining the concepts. These are the ones that I've read: 
+		<a href="https://courses.cs.washington.edu/courses/cse403/96sp/coupling-cohesion.html">University of Washington</a>, 
+		<a href="https://freefeast.info/difference-between/difference-between-cohesion-and-coupling-cohesion-vs-coupling/">FreeFeast</a> and
+		<a href="https://simpleprogrammer.com/back-to-basics-cohesion-and-coupling-part-1/">Simple Programmer</a>. 
+		<strong>Coupling</strong> is a fancy technical term for "independent" (nota bene low coupling means highly independent). <strong>Cohesion</strong> is a fancy term for "logically self contained".
+	</p>
+
+	<h2>
+		Bikes, computers, Node.js
+	</h2>
+	<p>
+		What do bikes, desktop computers, and Node.js have in common? It sounds like a good start to a joke, but I can't think of a witty ending. What they have in common is what makes them great objects. They are all modular! Your bike bell breaks, you replace it with a new one. Same for a sound card in a desktop computer. You can place those objects on the coupling / cohesion axis, if you wish to.
+	</p>
+	<p>
+		If you've been working with JavaScript for a while, you are probably familiar with Node.js. It's a run-time environment that executes your JS code outside of the browser. Like the bicycle frame to a bike, or the motherboard to a desktop computer, Node.js is the one of the main components of JavaScript development (both on the back end, or in the front end build pipelines).
+	</p>
+	<p>
+		Because programmers are inherently lazy, rather than writing the same code many times, they bundle the code into a <strong>module</strong> that they can just import next time they need it. And because they are lovely human beings, they share their module on the internet for other people to use. If you use Node.js, it is highly likely that you are also familiar with npm or yarn; the most popular node package managers out there.
+	</p>	
+	<p>
+		To actually use a module in your code, you first need to install it in your project, and then, import it inside the relevant file.
+	</p>
+	<p>
+		It is worth noting that even when you move some code into a different file to maintain separation of concerns, you are technically creating modules.
+	</p>
+
+	<h2>
+		It wasn't always this way.
+	</h2>
+	<p>
+		As all spoken languages do, programming languages (including JavaScript) keep evolving too. But unlike spoken languages, programming languages can't be adopting every single new thing without checking how it fits into a language on a larger scale.
+	</p>
+	<p>
+		Prior to ES6 (aka ES2015) JavaScript did not come with inbuilt methods to import and export modules. <span class="in-line-code">module.exports</span> and <span class="in-line-code">require("./path")</span> themselves only came with CommonJS; an API designed to make it easier to build (using JavaScript) apps that work outside of the browser (eg use JS server-side). A band-aid, if you will, to include much needed functionality without waiting for the next iteration of the JavaScript core. There have been other attempts to solve this problem, AMD being the one of note, but none made as big of an impact as CommonJS did.	
+	</p>
+
+	<h2>
+		But WHY?
+	</h2>
+	<p>
+		Today JavaScript is used by a number of frameworks to make apps and websites, and there's Node.js to do "backend" logic. Let's pause there for a moment.
+	</p>
+	<p>
+		JavaScript was devised to be a programming language for the web; one that all browsers would support and enable the websites do magic. <strong>This has never changed.</strong> Node.js isn't some independent interpreter, it's simply the guts of Chrome browser responsible for handling JavaScript that have been repackaged to work headless. The V8 execution engine, as it is called, alongside with other feature such as threading, unified API, and package management, make up Node.js.
+	</p>
+	<p>
+		So if it's all browser, how did modules work before CommonJS? Well, it's all browser based, right? All all browsers have windows, right? So basically, ye ol' school modules were designed in such a way that they hooked up to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window">window</a>.
+	</p>
+
+	<h2>
+		Translate, transform, TRANSPILE!
+	</h2>
+	<p>
+		Let's come back to now. You're setting up a new JavaScript project. You're up to speed with the ternary operator, rocket science, and all the swanky functionality of ES6. It's a no-brainer, really; you should code in ES6 and use its native module exporting / importing! Or is it?	
+	</p>
+	<p>
+		You see, there is an issue with this. Except rare cases when you know the recipient is running the latest Chrome, when you ship your code, you don't actually ship the ES6 version. You need to <strong>transpile</strong> your code first, so that older browsers can render your product without mishaps. A transpiler takes your ES6 code and spits out its equivalent in ES5. The resulting code, although handled gracefully by vast majority of browsers, old and new, can also be heavier and slower than if written in ES5 (& CommonJS) to start with.
+	</p>
+	<p>
+		So before you start writing your new project, have a good think if you actually have a reason to use ES6 that needs transpiling. Written in late spring 2017, 
+		<a href="https://www.freecodecamp.org/news/you-might-not-need-to-transpile-your-javascript-4d5e0a438ca/">
+		this article by FreeCodeCamp</a> explains very well when the code should be transpiled. It boils down to TS, TS, TS, TS! (OK, there's some creative wrangling of words to make the acronym work throughout): (use of) TypeScript; (want to) Tree Shake; Trial and Study (latest features of the language); and (use of) Tags in Script (like JSX in React).
+	</p>
+
+	<h2>
+		The tastiest fruit is the ripe one
+	</h2>
+	<p>
+		I'm very fond of the vegetable patch in my back garden. Among all the tasty things, every year tomatoes get the prime spot (I can recommend German Johnson variety).   Now, tomatoes have an interesting property; if they are not ready to be picked, they are quite difficult to get off the vine. If they are ripe, a gentle touch can set them free. Fruit trees are the same. So "tree shaking" gets you only the fruit you're interested in (ie the ripe ones).
+	</p>
+	<p>
+		As with many concepts in this blog post, this one merits from a bit of background explanation. Going back to the possible structures, both direct importing and indirect importing rely on a <strong>single entry point</strong>. It's what it says on the tin. Back when each module was attached to the <em>window</em> directly there were many entry points to your codebase. With the arrival of Browserify and Webpack this changed. Those tools bundled the code together by looking at <em>main.js</em>, gathering all the modules that were <span class="in-line-code">require</span>d, and shipped it in a neat little package for the browser to access. Although it was an improvement over chucking everything at the <em>window</em>, it came with a major drawback. Those tools were very eager, too eager in fact. They packaged each and every little part of the module, even if all you needed was, well, only a little part of it. In practice this means that you're shipping code that's never used, making your product heavier than it needs to be. You wouldn't come up to a tree, harvest every single fruit (ripe or not) and then sort them at home, would you?
+	</p>
+	<p>
+		Tree Shaking was first possible in ES6. Given the fruit tree example, you can guess what it does. If you only need a small part of the module, only the part that is actually needed is packaged and shipped. The resulting package is more compact, quicker to serve to the client, and easier to track metrics overall.
+	</p>
+
+	<div id="tldr" class="tldr">
+	<h1>
+		TL;DR
+	</h1>
+	<p>
+		E: export<br>
+		I: import<br>
+		U: use
+	</p>
+
+	<h2>ES5</h2>
+	<p>Export the only function from a file</p>
+	<div class="block-code">
+		E: module.exports = add;<br>
+		I: var add = require("./add");<br>
+		U: add(3,6);<br>
+	</div>
+
+	<p>Export a function when there are many in a file without changing its name</p>
+	<div class="block-code">
+		E: module.exports.multiply = multiply;<br>
+		I: var multiply = require("./multiplyAndDivide").multiply;<br>
+		U: multiply(3,6);<br>
+	</div>
+
+	<p>Export a function when there are many in a file, but assing it a different name in the process</p>
+	<div class="block-code">
+		E: module.exports.howManyTimes = divide;<br>
+		I: var divideForMe = require("./multiplyAndDivide").howManyTimes;<br>
+		U: divideForMe(3,6);<br>
+	</div>
+
+	<h2>ES6</h2>
+	<p>Export the only function from a file</p>
+	<div class="block-code">
+		E: export default add;<br>
+		I: import add from "./add";<br>
+		U: add(3,6);<br>
+	</div>
+
+	<p>Export a function when there are many in a file without changing its name</p>
+	<div class="block-code">
+		E: export default {multiply, divide};<br>
+		I: import {multiply, divide} from ".multiplyAndDivide.js";<br>
+		U: multiply(3,6);<br>
+	</div>
+
+	<p>Export a function when there are many in a file, but assing it a different name in the process</p>
+	<div class="block-code">
+		E: export default {multiply, divide};<br>
+		I: import * as mANDd from ".multiplyAndDivide.js";<br>
+		U: mANDd.multiply(3,6);<br>
+	</div>
+	</div>
+
+	<h2>
+		Exporting and importing, CommonJS style.
+	</h2>
+	<p>
+		CommonJS uses <span class="in-line-code">module.exports</span> to export content from file, and <span class="in-line-code">var {name} = require("path/to/origin")</span> to import code into the destination file.
+	</p>
+	<p>
+		When it comes to <strong>direct importing</strong>, the implementation can differ depending on how many functions you are exporting from a given file.
+	</p>
+	<p>
+		To export a function from a file that has only one function - "add", use <span class="in-line-code">module.exports = add;</span>.
+	</p>
+	<p>
+		To import it, use <span class="in-line-code">var add = require("./add");</span>
+	</p>
+	<p>
+		If you have more than one function that you want to export from a file, exporting is a little bit more complex. To export "multiply" from our "multiplyAndDivide.js" file you need to tell module.exports to look at a specific function: <span class="in-line-code">module.exports.multiply = multiply;</span>. The semantics are as follows:
+		<ul>
+			<li>
+				<span class="in-line-code">module.exports.</span> to initiate the export
+			</li>
+			<li>
+				<span class="in-line-code">multiply</span>: the word between the dot and the equals is the name you want this function to be known outside of the current file - a reference name. 
+			</li>
+			<li>
+				<span class="in-line-code">=</span> assigns the export to…
+			</li>
+			<li>
+				<span class="in-line-code">multiply</span>: … the function's name in the current file
+			</li>
+		</ul>
+	</p>
+	<p>
+		To import this into the destination file, you need to declare a variable, assign it to the path - as you did when exporting a single function AND you need to provide a reference to the function by adding <span class="in-line-code">.{referenceName}</span>, like so: <span class="in-line-code">var multiply = require("./multiplyAndDivide").multiply</span>.
+	</p>
+	<p>
+		A quick recap:
+		<ul>
+			<li>
+				Export/import a function from a file that only has that function: <span class="in-line-code">module.exports = add;</span> & <span class="in-line-code">var add = require("./add");</span>
+			</li>
+			<li>
+				Export/import a function from a file that has many functions using the same name throughout: <span class="in-line-code">module.exports.multiply = multiply</span> & <span class="in-line-code">var multiply = require("./multiplyAndDivide").multiply;</span>
+			</li>
+			<li>
+				Export/import a function from a file that has many functions using different name (a reference name): <span class="in-line-code">module.exports.howManyTimes = divide</span> & <span class="in-line-code">var divide = require("./multiplyAndDivide").howManyTimes;</span>
+			</li>
+		</ul>
+	</p>
+
+	<p>
+		Indirect importing relies on importing the functions into a middle-man file, usually called <span class="in-line-code">index.js</span>. You need to export and import functions into index.js the direct way. Then, you can bundle all the functions into an object like so:
+	</p>
+	<div class="block-code">
+		module.exports = {<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;add: add,<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;subtract: substract,<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;multiply: multiply,<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;divide: divide<br>
+		}
+	</div>
+	<p>
+		and import it in the destination file the "direct" way.
+	</p>
+
+
+	
+	<h2>
+		Exporting and importing in ES6.
+	</h2>
+	<p>
+		In some ways, exporting and importing in ES6 isn't <em>that</em> much different than in ES5. But the vocabulary is different. And some of ES6 nifty features are used. And suddenly it feels like it's a new and confusing concept. However, like most things in programming, there is logic behind the madness!
+	</p>
+	<p>
+		To export the only function in the file, you can either write the function and then export it: <span class="in-line-code">export default add;</span> . Or you can export it in-line, so to speak: <span class="in-line-code">export default subtract = (a,b) => { return a-b}</span>. When you export a function as default, it will be, well, the one which is referred to by default when the file is imported. To import it, use <span class="in-line-code">import add from "./add.js";</span>.
+	</p>
+	<p>
+		The syntax for importing is as follows:
+	</p>
+	<ul>
+		<li><span class="in-line-code">import</span></li>
+		<li>name of the function to import OR <span class="in-line-code">*</span> to import all functions OR destructuring argument</li>
+		<li><span class="in-line-code">as</span></li>
+		<li>name this function should be known as in the destination file</li>
+		<li><span class="in-line-code">from</span></li>
+		<li>path to the origin file	</li>
+	</ul>
+	<p>
+		OR? OR?! AS? AS?!… Breathe! There is logic behind the madness! Let's take the a look at the options one by one.
+	</p>
+	<p>
+		<strong>Importing by name of the function</strong>: this is basically exporting / importing the only function in the file. Use <span class="in-line-code">export default add;</span> & <span class="in-line-code">import add from "./add.js";</span> when you declare and export the function in two distinct steps. To declare and export in one go, write <span class="in-line-code">export default = (a,b) => {return a-b};</span> & <span class="in-line-code">import subtract from "./subtract.js";</span>
+
+	</p>
+	<p>
+		<strong>Importing all with a star</strong>: to export, you build an object of functions, like you did in ES5. However, ES6 has a nifty feature where the key is automatically assigned the value of the same name, so you can have:
+		<span class="in-line-code">export default { multiply, divide }</span> in the multiplyAndDivide.js, and <span class="in-line-code">import * as mANDd from "./multiplyAndDivide.js"</span> in the destination file. <span class="in-line-code">as</span> is used to give the package that is being imported a name that can be used to refer to it. That way, if you're importing all functions from many files, you always know which file you're referring to!
+
+	</p>
+	<p>
+		In this case, to call the <span class="in-line-code">multiply</span> function with arguments of 5 and 3, you need to write <span class="in-line-code">mANDd.multiply(5,3);</span> - the first part being the reference to the file that you're importing (`mANDd`) and the second is the name of the function you want to use.
+
+	</p>
+	<p>
+		<strong>Destructuring object that we're importing</strong>: another nifty feature of ES6 is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#object_destructuring">destructuring</a>. Rather than importing key-values from an object one by one, you can do it in a single line: <span class="in-line-code">import { multiply, divide } from "./multiplyAndDivide.js"</span>. If you do that, you can call those functions directly: <span class="in-line-code">multiply(5,3);</span>.
+
+	</p>
+	<p>
+		<strong>Indirect importing</strong> is simpler in ES6 than in ES5. In ES5 you need to import each function into the index.js file, then assign them to an object. In ES6, you can export functions without importing them, like so:
+
+	</p>
+
+	<div class="block-code">
+		export { default as Alert } from './alert';<br>
+		export { default as Button } from './button';<br>
+		export { default as Icon } from './icon';<br>
+		export { default as Image } from './image';<br>
+		export { default as Link } from './link';<br>
+		export { default as Margin } from './margin';<br>
+		export { default as Padding } from './padding';<br>
+		export { default as Title } from './title';<br>
+	</div>
+	<p>
+		The code snippet above is an example content of the index.js file in Components folder of a React project.
+	</p>
+	
+	<h2>
+		Conclusion
+	</h2>
+	<p>
+		As you have learned, there are a number of different ways one can set up code modularisation. The implementation has evolved from an add-on to a native functionality of JavaScript and the ways of setting up modularisation reflect this.
+	</p>
+	<p>
+		Although this is not a new concept, it is taking time to implement at native level. ES Modules, which bring some great functionality to the table (eg Tree Shaking), are inscribed into ES6 standard, but it took a few years before the browsers started shipping Modules natively. At the time of writing, Modules in Node 11 have "Experimental" status. It will be an exciting and big step for JavaScript when it joins other, more mature coding languages, when the ES Modules will be fully supported out of the box!
+	</p>
+
+	<h2>Addendum - what about now?</h2>
+	<p>
+		I am finally getting round to publishing this in late December 2021. I might - might - get around to writing a paragraph or two about the current status of ES Modules and how they fit into the JavaScript ecosystem. But at this point it would be another thing that's stopping me from publishing this, so it will need to wait. 
+	</p>
+
+	<h2>Acknowledgements</h2>
+	<p>
+		I would like to thank my colleagues for their help and support; brainstorming, proofreading, and patient explanations!
+	</p>
+
+	<h2>
+		A note on mental health
+	</h2>
+	<p>
+		I decided, wherever possible, to end my talks / write-ups with this note. Mental health is important. Depression and anxiety are real. They can suck out the joy of living out of you. There are many other mental health issues, but those are the two that affected me, so I talk about just those two.
+	</p>
+	<p>
+		Depression has many symptoms. Many say they lose interest in doing thing they previously loved doing. Getting out of bed can be difficult, standing in the shower might take up all the energy you have for the day. I found that I was always tired; stuck in first gear so to speak.
+	</p>
+	<p>
+		Anxiety can be debilitating. It stops you doing stuff you love for irrational reasons. I toyed with the idea of moving away from the town I was living in (and where I had all my support network) to pursue an MSc. Just the idea of the possibility of a chance of moving away triggered an hour long sobbing/crying episode.
+	</p>
+	<p>
+		Meds helped. Many mental health issues are simply chemical imbalances in the brain. "Meds are unnatural" approach is bullshit; if you had diabetes, you would not refuse insulin because "it's unnatural". Meds are there to compensate where your body falls short. Your mileage may vary, different meds will have different effect; if an average day was 4/10, Sertraline (first SSRI I tried, stayed on for about 6 months) made it 6/10 and Citalopram (second one, that I stayed on for better part of 2 years) made it 9.5/10 for me.
+	</p>
+	<p>
+		I'm no longer on meds. Circumstances in my life changed, I was able to scale back and stop completely. I still sometimes have bad days. I conside myself a spoonie. I often flop on the sofa at the end of the day unable to do much more than browse the internet aimlessly.
+	</p>
+	<p>
+		If you are struggling, don't be afraid to talk. Not everyone might be able to empathise. You might be surprised how many other people face the same difficulties. There are counselling services on-line that you can access for a reasonable price. If you can, talk to your doctor. Figure out what works for you.
+	</p>
+	<p>
+		Be honest with yourself; admitting something isn't right is the hardest step in making it right.
+	</p>
+
+</div>
+
+</div>
+
+</body>

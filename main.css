@@ -5,14 +5,12 @@
 	margin-left: 20%;
 	margin-right: 20%;
 	margin-bottom: 2%;
-	align: center;
 	}
 
 	.main-content-article {
 		margin-left: 25%;
 		margin-right: 25%;
 		margin-bottom: 2%;
-		align: center;
 	}
 
 	.writing{
@@ -25,6 +23,11 @@
 		font-size: 16px;
 		background-color: #b3aca9;
 		padding: 10px;
+	}
+
+	.details-block {
+		margin-left: 20px;
+		margin-right: 20px;
 	}
 }
 
@@ -108,6 +111,28 @@ ul {
 	font-family: Raleway;
 }
 
+details {
+	font-family: Raleway;
+}
+
+button {
+	font-family: Raleway;
+	padding: 20px;
+	background-color: #dfcace;
+	border-radius: 10px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+summary {
+	background-color: #ededed;
+	padding: 5px;
+	margin: 5px;
+	border-color: black;
+	border-style: solid;
+	border-width: thin;
+}
+
 
 
 .internal-links {
@@ -141,7 +166,6 @@ color:inherit;
 }
 
 .profile-link {
-	align: center;
 	width: 100px;
 }
 
@@ -171,4 +195,14 @@ color:inherit;
 	background-color: lightskyblue;
 	margin-bottom: 20px;
 	padding: 10px;
+}
+
+.button-holder {
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 20px;
+}
+
+.bonus-bottom-margin{
+	margin-bottom: 16px;
 }

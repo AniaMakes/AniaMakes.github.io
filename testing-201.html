@@ -1,0 +1,461 @@
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Vollkorn+SC&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vollkorn+SC&display=swap" rel="stylesheet"><link href="main.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images\favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="images\favicon-16x16.png" sizes="16x16" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>
+	function expandCategory(category){
+		const allPoints = document.getElementsByClassName(category);
+		Array.from(allPoints).forEach( item => {
+			item.open = true
+		})
+	}
+
+	function collapseCategory(category){
+		const allPoints = document.getElementsByClassName(category);
+		Array.from(allPoints).forEach( item => {
+			item.open = false
+		})
+	}
+</script>
+
+<head>
+	<title>Testing 201 by Ania Bebb</title>
+</head>
+
+<body>
+	<div class="head">
+		<div class="top">
+		  <div class="page-title">
+			<h1 class="name-header">-- Ania Bebb -- </h1>
+		  </div>
+		  <div class="profile-links">
+			<div class="profile-link">
+			  <a href="https://github.com/AniaMakes"><img src="images\github-logo.png" alt="GitHub logo" height="50px"></a>
+			  <p>My GitHub Profile</p>
+			</div>
+			<div class="profile-link">
+			  <a href="https://uk.linkedin.com/in/annabebb"><img src="images\linkedin-logo.png" alt="LinkedIn logo" height="50px"></a>
+			  <p>My LinkedIn</p>
+			</div>
+			<div class="profile-link">
+				<a href="https://twitter.com/AniaMakes"><img src="images\twitter-logo.png" alt="Twitter logo" height="50px"></a>
+				<p>Twitter</p>
+			</div>
+		  </div>
+		</div>
+<hr>
+
+<div class="main-content-article">
+	<p>
+		<a href="./index.html">Back to the home page</a>
+	</p>
+<hr>
+	<h1>
+		Testing 201: What to test
+	</h1>
+	<p>Written in June 2020</p>
+	<p>Published 29 December 2021</p>
+	<p>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.</p>
+	<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></p>
+<hr>
+<div class="writing">
+
+	<h1>Intro</h1>
+	<p>
+		At this point in time, I have been coding professionally for just about two years. I completed a coding bootcamp back in April 2018 - where as part of the syllabus we were taught how to test. Unit tests, mocking, etc. Since then I have encountered integration testing, and end-to-end (often referred to as E2E) testing. There are plenty of articles on the internet on <strong>how</strong> to do all these things, but I struggled to find resources that would help me to learn <strong>what</strong> to test. If you need short and sweet definitions of the terms used in this blog post, you will find <a href="https://medium.com/welldone-software/an-overview-of-javascript-testing-7ce7298b9870">Vitali Zaidman's post "Overview of JavaScript Testing in 2020"</a> helpful.
+
+	</p>
+	<p>
+		As one can imagine, the <strong>what to test</strong> is very subjective on the individual, the team, the project. Nevertheless, I was baffled that there aren't many guides to even give people a general idea of what one could test. So, as part of my personal goals for the quarter, I decided to interview a number of colleagues about what they think about testing and make a blog post about it. It is worth noting that my interviewees assured me that <strong>what to test</strong> knowledge is acquired with experience, and lack thereof is a very common worry among newcomers. 
+	</p>
+	<p>
+		The scientists among you will cringe at the small sample size (six), the self-selection (I only interviewed those who volunteered), and the limited group (all of them are my colleagues at the FT, and white men). The methodology wasn't very scientific either - I had a bunch of questions I aimed to ask everyone, but given that the interviews were more of a chat than a strict question - answer interview, there was a lot of variation on how the questions were asked and the examples I used. Even so, I found those chats extremely beneficial to my understanding of <strong>what</strong> to test. 
+	</p>
+	<p>
+		One of my proofreaders pointed out that to have a better sample size, I could have reached out to people individually, rather than asking “into the void” on slack. This is because people may be less sure about being able to contribute meaningfully when asked in public, or feel that such a call is not aimed at them. I’d like to apologise as this has not occurred to me at all - despite the fact that I used this exact method suggested when getting volunteers for events back when I worked at a charity! I’m writing this paragraph so that anyone else who thinks about interviewing those around them remembers that asking directly will result in a better sample size!
+	</p>
+	<p>
+		The language we use in Customer Products department is JavaScript, and the testing framework discussed was Jest. We mainly build web apps to display information to the user and collect limited information about them in return. It is certainly different to the code that sent humankind to the moon in the past (but apparently spacecraft are now run by JavaScript, so who knows what the future brings?). I am sure the general concepts can translate into any other coding language. Do bear in mind that the tools I mention may be obsolete in a few years, but I hope that the <strong>what to test</strong> message can persist. 
+	</p>
+	<p>
+		Given the nature of the subject, there will be a lot of disagreement with what I write here. If you feel strongly about your opinion, please put together a blog post of your own. After all, the interviews took note of people's Personal Opinions (and not that of our employer). 
+	</p>
+	<p>
+		Many thanks to my interviewees: Alex Wilson, Matt Hinchliffe, James Wise, John Flockton, Nick Ramsbottom, and James Nicholls, as well as my beta-readers: Jennifer Shepherd and Tara Ojo and Nick Ramsbottom.  
+	</p>
+	
+	<h1>Should I ...?</h1>
+
+	<div class="button-holder">
+		<button onclick="expandCategory(`should-i`)"><strong>Expand all "Should I"</strong></button>
+		<button onclick="collapseCategory(`should-i`)"><strong>Collapse all "Should I"</strong></button>
+	</div>
+
+	<details class="should-i">
+		<summary>
+			... test simple functions native to the language itself (such as addition) when used as in the documentation?
+		</summary>
+		<div class="block-code details-block">
+			const addNumbers = (a, b) => a + b;
+		</div>
+		<p class="details-block">
+		The example of adding two numbers is very common in resources on testing for beginners, probably due to its straightforward nature many can remember from maths lessons. The tests go on checking that given two numbers you get their sum in return. Whilst it makes sense in theory - it’s  an example people can relate to - this actually gives newcomers the wrong idea about testing from the get go. Although writing a test to cover two digit addition is no more trouble than writing the code itself (there aren’t edge cases), it sends a questionable message: that we should test the functionality of the language itself. 
+		</p>
+		<p class="details-block">
+		I asked this question of most of my interviewees, and the consensus was that we should know the functionality of the language itself. We should also trust that whoever built it has checked that the functionality works as intended.
+		</p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+		... test modules that I found on the Internet?	
+		</summary>
+		<p class="details-block">How many seasoned developers actually look at the repo for the module they are using? Checking how robust the testing is? Or do you just look at the number of downloads and make a decision based on that?</p>
+		
+		<p class="details-block">If you really like the module and would love to use it, but you feel the testing could be better, overall you will make a bigger difference by making a PR with robust tests to the module repo itself, than testing it within your application.</p>
+		
+		<p class="details-block">This is one of those questions which has an answer with a "but" in the middle. In general, you should trust that whoever shipped the code did their due diligence and don't bother testing the library methods you're using. There are two caveats here: 
+		- if there is a piece of code that is essential to your application (if this code breaks you lose huge amounts of money) you may want to add a token test or two to be sure the method works exactly as you want it to work. 
+		- if you're using any of the methods in a way that isn't specified in the manual, even if they are methods native to the language, you may wish to add a test to be sure that your assumption continues to be correct. Before Node.js 11, one could use <span class="in-line-code">array.sort((a,b) => a > b)</span> but the usage of lesser and greater than has not been a documented one, and it stopped working in the newer versions! The reason why you shouldn't do hacky implementations is because the things that are documented have been tested by the developer (one hopes), and the rogue implementations, haven't - so you can't rely on your code behaving in a predictable fashion.</p> 
+		
+		<p class="details-block">One hopes that any breaking changes are announced through the warning messages at build, but that isn't always the case. Even if the change isn't announced, your tests or your build should fail and alert you to this. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... stub out the modules that I'm using in tests or use the modules themselves?
+		</summary>
+		<p class="details-block">This is an interesting one, as the consensus has been that the more popular the module is, there is less interest in stubbing it out for testing purposes. Those who were asked, were quite happy to run <a href="https://lodash.com/">lodash</a> in tests, but preferred to stub out less popular modules, as well as those used internally within the organisation. You might wonder why internal modules are treated this way, but the reason is a very logical one: internal code is subject to review only within the organisation and therefore is not subject to the same level of scrutiny as large open source projects. It is also worth noting that some types of modules are very fragile by their nature - for example ones that touch the file system - and thus are better off stubbed. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... follow the testing pyramid to the letter (many unit tests, some integration tests, a pinch of E2E tests)?
+		</summary>
+		<p class="details-block">The testing pyramid is the concept that came up again and again when talking about testing. And although it is a popular concept, it probably should only be followed very loosely. Oftentimes writing integration tests is as quick as writing unit tests. And it may be that it is less important that the things work independently, and more important that together they do this one specific thing. Your oven door can open, and your drawer can open, but can your drawer open when the oven is closed? With integration tests, you cover a large amount of codebase with comparatively little effort. My interviewees agreed, however, that the E2E tests should be used sparingly due to how fragile they are.</p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... aim to write pure functions to help me with testing?
+		</summary>
+		<p class="details-block">Pure functions - ones that given the same input always return the same output - are definitely easy to test and make your code more robust. Unfortunately sometimes it's just not possible to only write your code in pure functions. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... aim to write atomic functions to help me with testing?
+		</summary>
+		<p class="details-block">An atomic function is a function that does only one thing. Say you want to check if a number is both prime number and a number in a Fibonacci sequence. Using atomic functions means that your main function will call both a <span class="in-line-code">isPrime()</span> and <span class="in-line-code">isFibonacci()</span> - the logic lives in those atomic functions rather than being part of a main function. Making your functions atomic will help you with testing and figuring out what can go wrong in each step. But as with pure functions, it is not always possible to write functions that are atomic. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... mock my API responses?
+		</summary>
+		<p class="details-block">Definitely. API calls rely on a number of factors, including (for example) being logged in and being connected to the internet when the tests run. Mocking out the API response will make your tests more robust, because you cut down on the number of the things they depend on. It is very helpful if you don't have access to the API, but you know how the returned data is structured. Mocking the response allows you to write code that you can be confident does what you want it to do. Mocking (as opposed to using Nock), works well if you know the input and output, but you aren't sure what is happening in the middle, for example when working with AWS SDK or with URL encryption. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... compare all of the input and all of the output?
+		</summary>
+		<p class="details-block">No. Imagine your function takes an object and returns the same object but with a new key-value pair. For example, it takes a user object (where one of the keys is the date of birth), and returns the same object but with a new key "age". The object you give to the test can be just <span class="in-line-code">{ dob: '2002-10-12'}</span>, even if in reality this object would have twenty other key-value pairs. And the expectation would only check that the object contains the <span class="in-line-code">{age: 18}</span> key-value pair. </p>
+	</details>
+	
+	<details class="should-i">
+		<summary>
+			... write E2E tests, even though they are very fragile?
+		</summary>
+		<p class="details-block">Yes, even if it's only one test for each critical path. Yes, they will often break on CI and then work on re-run without changing as much as a space in the code. Sometimes there's a blip in one of the APIs they depend on. Sometimes it's a race condition that fails. They are needed to make sure that a straightforward user journey <strong>works</strong>. The fragility can also be helpful and expose changes in the APIs and modules you use. In my short time at the FT (5 months at the time of writing), our E2E tests have highlighted a change in our dependencies at least twice. One was when our component library team made an item invisible on the page, and we were using this to find our data for testing. The test suite couldn't see those items, so failed as if they weren't there. The second was one with a much bigger organisation impact, and although this API change was only made in the test environment, it affected not only our tests (which rely on creating fake users in the test environment), but a number of other teams’ pipelines as well. If you encounter race condition errors more than you'd like on CI, there is a big chance your users will also encounter it.</p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... make sure I have 100% test coverage?
+		</summary>
+		<p class="details-block">A very strong no. There will be people who will tell you otherwise. There will be services that refuse to work with your code unless the test coverage is above a certain threshold. Enforcing 100% test coverage will make you write tests to meet the coverage requirement rather than help you be confident in how your code works. 100% test coverage often comes with expensive overheads, where a minor change in code may impact a large number of tests which take time to be changed. If that happens every time you change the code, those programmer hours add up. You may also run into situations where you deliberately put in some amount of bloat code and tests for it, just to improve the coverage percentage. 100% test coverage tends to make tests become an overhead and therefore counterproductive. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... use snapshot tests for my website?
+		</summary>
+		<p class="details-block">Snapshot tests are better than nothing, and are useful when you are refactoring code and want to make sure things still look the same. Snapshot tests often fail at being specific - does this massive wall of text match exactly with this other massive wall of text? Oftentimes changing a single word, or a class, means creating another snapshot, but we rarely commit changes word by word, so this approach may hide visual regression discrepancies even though the test is there. Furthermore the user generally cares about the content and not that the website has so many divs and so many buttons. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... test hardcoded values in my components?
+		</summary>
+		<p class="details-block">If they are essential to your business and the other data would not make sense without them (for example data labels), a quick check doesn't hurt. But there's also an argument that given this data is hardcoded, it will always be there if the component renders. Bottom line, if you can check that the values show up as expected without hunting for the exact deep nested comparison, do run a quick check. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... test with every matcher I can?
+		</summary>
+		<p class="details-block">No. One of the things that came up again and again, is that the tests should tell you, very specifically, what broke. If you check for a result of, say, a maths equation, giving it a bunch of matchers like is it "truthy" or "falsy", or "not an object" doesn't help you in any way if it breaks. If the answers should always be three, check that the result is three. Don't bother if the result is less than or equal to two, or the result is greater than or equal to four. But if the answers could be anything less than two, the test should be if the result is smaller than two. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... write an integration test for a function that uses a bunch of other functions that are really well tested?
+		</summary>
+		<p class="details-block">Tentative yes. One of the rules of testing is to make sure that the tests are supposed to pinpoint precisely what went wrong. Imagine you have a function <span class="in-line-code">buildACar()</span> and this function calls <span class="in-line-code">buildFrame()</span>, <span class="in-line-code">attachMotor()</span>, <span class="in-line-code">attachSeats()</span>, and so on. If your test for <span class="in-line-code">buildACar()</span> fails, you will most likely struggle to pinpoint which of the inner functions does not work as intended. But you also want to make sure that the car works as a whole. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... check every permutation of the function?
+		</summary>
+		<p class="details-block">This is a tricky one. Imagine you have a function that takes two numbers, between one and ten. Writing a hundred tests seems ridiculous because of the high overhead for change. You get diminishing returns the more tests you write.  Also, if the function doesn't work, it will probably break the first test. If your code has two paths, check both. If it has over twenty, aiming to cover between ten and twenty percent of the cases is probably the reasonable thing to do. There might be exceptions - if you're in banking, or the medical field, you may wish to test all the paths to give you a peace of mind. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... ignore important functions that are difficult to test?
+		</summary>
+		<p class="details-block">If your function is difficult to test, it is a sign that it would benefit from being refactored in such a way that it can be tested easily. It is worth your time to refactor the logic so that you can test your code and therefore have confidence that your important function is doing what you want it to do. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... practice Test Driven Development?
+		</summary>
+		<p class="details-block">Test Driven Development (TDD) is something that is widely spoken about - because it seems like an excellent idea - and yet rarely practiced (in my experience). You can't really do TDD if you don't know what your data looks like - but console logging things as you go so you can do at least a bit of TDD is a valid approach. It does come in useful, however, when writing data transformation functions - it is often quicker to write a test than to reload the page and click what you need to see if your change worked. TDD also relies on being able to figure out the happy and sad paths before you write the code and sometimes this is difficult. </p>
+	</details>
+
+	<details class="should-i">
+		<summary>
+			... let some logic run into "shout testing"?
+		</summary>
+		<p class="details-block">Shout testing is a nickname for a lazy approach of "if I turn off this app and it affects someone, they will come and complain" (rather than asking around if someone is using the app in the first place). I would not do this deliberately because that means you know that there is a functionality you haven't tested and you're letting the user be the guinea pig. If this is about some obscure edge case, that maybe happens due to a race condition only present in certain circumstances, it is reasonable that you were not able to imagine this happening and shout testing is a valid way of exposing the bug. But if you do receive alerts via shout testing, make sure to write the test - you now know the circumstances and the steps to reproduce the bug, or at least what the undesirable behaviour that is occurring is - and patch the bug. </p>
+	</details>
+
+	<h1>Always test these (in no specific order)</h1>
+
+	<div class="button-holder">
+		<button onclick="expandCategory(`always-test-these`)"><strong>Expand all "Always test these"</strong></button>
+		<button onclick="collapseCategory(`always-test-these`)"><strong>Collapse all "Always test these"</strong></button>
+	</div>
+
+	<details class="always-test-these">
+		<summary>
+			Things that other parts of your code rely on, especially when you are making assumptions
+		</summary>
+		<p class="details-block">Imagine you have a <span class="in-line-code">paint</span> function which takes an item and a colour, so <span class="in-line-code">paint('mug', 'blue')</span> will give you a <span class="in-line-code">blue mug</span>. It is a reasonable assumption that if you run <span class="in-line-code">paint('car', 'black')</span> you will get a <span class="in-line-code">black car</span>, but if your app's main purpose it to make sure that the cars are being painted correctly, it will benefit you to add tests to the <span class="in-line-code">paint</span> function that specifically check behaviour with cars. </p>
+	</details>
+
+	<details class="always-test-these">
+		<summary>
+			Business critical and high stakes paths
+		</summary>
+		<p class="details-block">If your business relies on subscribers, make sure that your subscribe functionality works just the way you want to. Ditto with taking payment. Also test anything that you would consider high stakes - in some domains (for example medicine), a small mistake may have disastrous consequences. </p>
+	</details>
+
+	<details class="always-test-these">
+		<summary>
+			Data transformations
+		</summary>
+		<p class="details-block">An example would be receiving information from API, and changing it in some way for use at a later date. Take an API that gives you user data, including their date of birth. Their age is something that your data transformation calculates when run. </p>
+	</details>
+
+	<details class="always-test-these">
+		<summary>
+			Component state and anything that gets calculated in the template
+		</summary>
+		<p class="details-block">Is your button supposed to be a different colour given a prop? Or display different text? Or be active / inactive? Or there is some calculation / text formatting / other conditional in the component? Write tests that check the button colour or text or state given the conditions. Make sure that the calculation output is what you expect it to be. </p>
+	</details>
+
+	<details class="always-test-these">
+		<summary>
+			Things that are explicitly mentioned in the ticket as definition of done or acceptance criteria
+		</summary>
+		<p class="details-block">If the ticket says that the button should behave differently depending on various conditions, write tests that check that. </p>
+	</details>
+
+	<details class="always-test-these">
+		<summary>
+			Things which are going to be high priority to fix if they go wrong
+		</summary>
+		<p class="details-block">A minor bug on the top of the home page is going to have higher customer impact than a major bug that's buried several layers deep and is only seen by some of your customers. </p>
+	</details>
+
+	<details class="always-test-these">
+		<summary>
+			Fire alarms on clock change date... wait, what?
+		</summary>
+		<p class="details-block">Your warning systems, in this case your tests, are only any good if you pay attention to them. If you write tests, but they don't run on commit and / or on CI, they are not worth anything. In my short career I've seen several cases of people changing the code, but don't bother with updating the tests because said tests aren't automatically run. Or the functionality that was thoroughly tested was migrated to a different app, but the tests were left behind and the functionality wasn't tested in its new place. </p>
+		<p class="details-block">Smoke and carbon monoxide alarms are common in UK households, less so elsewhere. You can test them either by pressing a button to make them sound an alarm (unit test), or you can make smoke (burn a bit of plastic envelope in a can), and stick it under the alarm (E2E test). Ours took about 15 seconds to sound, and this is with the smoke generator right underneath the sensor. Unit tests are nice shortcuts, but don't forget they need to run within a bigger system.</p>
+	</details>
+
+	<details class="always-test-these">
+		<summary>
+			The things you absolutely don't want to happen
+		</summary>
+		<p class="details-block">Can a wrong path or a race condition kill or maim someone? Write a test to make sure your code guards against it. And if you can't do that because of how the code is written, rewrite your code. You think this will never happen? Read about <a href="https://en.wikipedia.org/wiki/Therac-25">Therac-25 machine software fault</a>, that ought to change your mind.</p>
+	</details>
+
+	<details class="always-test-these">
+		<summary>
+			Before and after when testing for change
+		</summary>
+		<p class="details-block">Say you have a sad face that, when you click a button, turns into a smiley face. Your E2E test can simulate a click and check it has a smiley face, but that is very deceptive. You have not confirmed that you are starting with a sad face! When testing for change, make sure you test the initial state (something exists / doesn't exist) before your action and checking for the desired outcome. You need to test both the initial and final state to ensure that the change happened.</p>
+	</details>
+
+	<details class="always-test-these">
+		<summary>
+			Test bugs before you fix them
+		</summary>
+		<p class="details-block">You've just discovered an evil edge case bug. Before you change your code to fix the bug, write a test that exposes said bug (write a test that fails) - that way you can fix the code and be sure that your patch works if your tests pass. </p>
+	</details>
+	
+	<details class="always-test-these">
+		<summary>
+			Public methods
+		</summary>
+		<p class="details-block">In Object-Oriented Programming, a public method is one that can be accessed from anywhere, including outside the class where it's declared (private methods can only be used inside a class it's declared in). Your public methods are exposed for use by others and therefore you want to have the confidence that they do what you want them to do. </p>
+	</details>
+
+	<h1>
+		Your tests should ...
+	</h1>
+
+	<h3>
+		... be a form of documentation
+	</h3>
+	<p class="details-block">
+		A well written test suite will tell you what the code does and what to expect from it - with examples - without you needing to look at the documentation. 
+	</p>
+
+	<h3 class="bonus-bottom-margin">
+		... give you confidence that your implementation works 
+	</h3>
+
+	<h3 class="bonus-bottom-margin">
+		... tell you if the interface you rely on changes
+	</h3>
+
+	<h3 class="bonus-bottom-margin">
+		... aim to point out - as precisely as possible - where the error is
+	</h3>
+
+	<h3 class="bonus-bottom-margin">
+		 ... help you, in your job as software developer, to delivery quality code
+	</h3>
+
+	<h3 class="bonus-bottom-margin">
+		... be cheap to set up and maintain
+	</h3>
+	<p class="details-block">
+		If your edge case scenario would set you back £100, but the cost of implementing the tests is £2000 and then whatever time is needed to update them... It's reasonable to say that trying to cater for this edge case may not be worth doing. 	
+	</p>
+
+	<h3>
+		... test what hurts or you think will hurt
+	</h3>
+
+	<h1>
+		Important things to remember
+	</h1>
+
+	<div class="button-holder">
+		<button onclick="expandCategory(`important-things`)"><strong>Expand all "Important things to remember"</strong></button>
+		<button onclick="collapseCategory(`important-things`)"><strong>Collapse all "Important things to remember"</strong></button>
+	</div>
+
+	<details class="important-things">
+		<summary>
+			Tests don't make your code bulletproof
+		</summary>
+		<p class="details-block">We use tests to give us confidence in our code; that it behaves the way we want it to: does the things it should, and doesn't do the things we don't want it to do. We need to remember that our tests are only as good as the people writing them. For example the edge cases, by their own nature, are the cases we may not realise exist. </p>
+	</details>
+
+	<details class="important-things">
+		<summary>
+			The code you are building will (in the vast majority of cases) be used by people who are not you
+		</summary>
+		<p class="details-block">People are different. It is easy to make assumptions when writing tests and test for just what you're familiar with. In the English speaking world, setting your test user name as John Doe will very likely pass your tests because your code makes certain assumptions. When you're responsible for setting up name rules for databases (as well as addresses and phone numbers), do yourself a favour and look up "falsehoods people believe about...". Test with a wide variety of data, maybe even use a tool like Fuzzer which randomly generates data for you. And if someone tells you to implement and test input sanitisation, please do your users a favour and question this business decision. "Ass" is in "lass" and "bass", "pot" is in "potter" and so on.</p>
+		
+		<p class="details-block">There are a number of jokes on the web, how the user will somehow manage to find a path that the programmer didn't imagine anyone would go down, or use a tool in a way that's baffling for the ones that designed it. </p>
+		
+		<p class="details-block">Many developers take fast internet connection for granted, and find it hard to imagine anyone not having access to the quality connection. This is a very dangerous assumption to make - there are plenty of developers and users in places that rely on dial-up speeds or where data is expensive. Your pretty image might be pretty but if it costs your users money to view, they are unlikely to keep using your page. And if they keep experiencing timeout on payment, it is likely that they will take their wallet elsewhere. I believe E2E test frameworks can simulate slow connections, I know browsers can definitely help you with this (dev tools - performance - network settings in Chrome).</p> 
+		
+		<p class="details-block">When you are building things, build them for the intended audience. If you're building science museum exhibits, make sure they survive an encounter with a curious primary-school-age child. If your website is to be used by people who don't really use computers on a daily basis, make sure you design and code accordingly - with clear error messages,  a straightforward main path, and words rather than icons.</p>
+	</details>
+
+	<details class="important-things">
+		<summary>
+			The coding language and the modules you use will either evolve or become less and less common
+		</summary>
+		<p class="details-block">Don't worry about the future (if you're keeping an eye on future functionalities of the language). Write the code and tests for how things work today. If it needs changing at a later date, there will be a relevant ticket in your team's to-do list. </p>
+	</details>
+
+	<details class="important-things">
+		<summary>
+			The application is a team effort
+		</summary>
+		<p class="details-block">If you're struggling to come up with tests, ask your teammates. If your ticket is a one-liner behemoth, use ticket refinement sessions to hash our further details. Those details should be more specific and therefore help you figure out what to test. In the ideal world your work as a programmer will be supported by dedicated Quality Assurance (QA) team - people whose primary task is to use your app like a user would and find any issues, but also to try to find any undesirable ways they are able to break said app (those are bugs that need to be fixed).  Maybe even test engineers - people who are employed to write the tests for your code.</p>
+		
+		<p class="details-block">And this is not just your small team, it should be extended to the organisation at large. A great idea for collaboration is "bug bash party" - basically a competition to break the app in creative ways to expose bugs. </p>
+	</details>
+ 
+	<details class="important-things">
+		<summary>
+			The quality of your tests rely on you knowing the testing framework you are working with
+		</summary>
+		<p class="details-block">There are a number of testing tools: Jest, Mocha, Cypress, Puppeteer... They are all similar in that most of them have matchers that do the same thing, but they are written differently. One framework's <span class="in-line-code">toBe</span> is another's <span class="in-line-code">to.be</span> and another's <span class="in-line-code">('to be', (...))</span>. Some matchers are more specific than others - <span class="in-line-code">toBe</span> versus <span class="in-line-code">toEqual</span>, for example. If you want your tests to be specific, you need to know the framework you're using and find the right methods to test your code. </p>
+	</details>
+
+	<details class="important-things">
+		<summary>
+			Black box testing vs white box testing
+		</summary>
+		<p class="details-block">Black box testing is where you don't care HOW the function does what it does, just that it gives the output as expected. You are testing the input and the result. White box testing is where you know how the code works and you test individual pieces of the function. </p>
+	</details>
+
+	<details class="important-things">
+		<summary>
+			A couple of rules of thumb
+		</summary>
+		<h3 class="details-block">Ours - Branching - Logic</h3>
+
+		<p class="details-block">A general rule of thumb, as described in this <a href="https://www.geepawhill.org/2019/02/18/pro-tip-tdd-focus-on-our-branching-logic/">blog post</a> - is to test only code which is</p>
+		<ul>
+			<li>Ours (written by us, don't test external dependencies) </li>
+			<li>Branching (various <span class="in-line-code">if</span> clauses)</li>
+			<li>Logic (choice making as opposed to calculations)</li>
+		</ul>
+		
+		<h3 class="details-block">Four goals of testing</h3>
+		
+		<p class="details-block">Another good rule of thumb, as noted in this <a href="https://builttoadapt.io/four-goals-of-a-good-test-suite-651b3a4cfd33">blog post</a> - is that the tests should</p>
+		<ul>
+			<li>be fast</li>	
+			<li>be clean</li>	
+			<li>give you confidence</li>	
+			<li>give you freedom (to refactor)</li>	
+		</ul>
+	</details>
+
+	<h1>A parting message</h1>
+	
+	<p>There are no hard and fast rules for testing. This document has been compiled to offer some guidance for those who struggle to figure out what to test, but in many cases the answers aren't straightforward. Please don't treat this document as a "my tests should do all this" - it is fine to cherry pick what is important to you and your project at the time. If you're building a project for fun that won't be used by anyone else, you may want to write tests to practice, but in reality, the time you spend writing tests may be better spent with friends and family, or going for a walk. I think the only hard "you must do this" is to do everything you can to stop your code contributing to injuring someone. And don't forget that knowing what to test in any given situation is a skill you can learn and you will get better at it with experience. </p>
+	
+
+</div>
+
+</div>
+
+</body>
+<footer class="main-content-article">
+	<hr>
+	<p>© 2021 Ania Bebb</p>
+	<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a>
+</footer>

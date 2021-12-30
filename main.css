@@ -144,11 +144,11 @@ summary {
 	padding-left: 20px;
 }
 
-.inline-b a:link{
+.inline-b a:link {
 color: inherit;
 }
 
-.inline-b a:visited{
+.inline-b a:visited {
 color:inherit;
 }
 
@@ -203,7 +203,7 @@ color:inherit;
 	margin-bottom: 20px;
 }
 
-.bonus-bottom-margin{
+.bonus-bottom-margin {
 	margin-bottom: 16px;
 }
 
@@ -211,7 +211,7 @@ color:inherit;
 	margin: 5px;
 }
 
-.headshot-div{
+.headshot-div {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 20px;

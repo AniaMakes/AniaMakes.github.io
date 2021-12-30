@@ -206,3 +206,7 @@ color:inherit;
 .bonus-bottom-margin{
 	margin-bottom: 16px;
 }
+
+.structure-images-bonus-margin {
+	margin: 5px;
+}

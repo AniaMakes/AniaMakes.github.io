@@ -52,7 +52,7 @@
 
 /* Sets the behaviour of the top (page title & prerequisites' links)*/
 
-@media only screen and (min-width: 1300px) {
+@media only screen and (min-width: 1160px) {
 	.top {
 	display: flex;
 	margin-left: 20%;
@@ -68,7 +68,7 @@
 	}
 }
 
-@media only screen and (max-width: 1299px) {
+@media only screen and (max-width: 1159px) {
 	.profile-links {
 	display: flex;
 	justify-content: center;
@@ -209,4 +209,10 @@ color:inherit;
 
 .structure-images-bonus-margin {
 	margin: 5px;
+}
+
+.headshot-div{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
 }

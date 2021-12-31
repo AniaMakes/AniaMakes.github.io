@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>ania.bebb.dev RSS feed</title>
+		<link>https://ania.bebb.dev/</link>
+		<description>Articles and talks by Ania Bebb</description>
+		<language>en-gb</language>
+		<atom:link href="https://ania.bebb.dev/ania-bebb-dev-rss.xml" rel="self" type="application/rss+xml" />
+		<item>
+			<title>Modules 101: how and why of exporting and importing in JavaScript</title>
+			<link>https://ania.bebb.dev/modules-101</link>
+			<guid>https://ania.bebb.dev/modules-101</guid>
+			<pubDate>Wed, 29 Dec 2021 13:00:00 GMT</pubDate>
+			<description>I always struggle to remember how to export and import functions in JavaScript - the methods differ depending if your code gets transpiled, for example. I struggled to find a at-a-glance comparison, so I made my own - and compiled all sort of historical and background information to go with it.</description>
+		</item>
+	</channel>
+</rss>

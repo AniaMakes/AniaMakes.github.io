@@ -71,9 +71,21 @@
 	<p>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.</p>
 	<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a></p>
 <hr>
+
+<h1>
+	Table of content
+</h1>
+<ul class="writing">
+	<li><a href="#intro">Intro</a></li>
+	<li><a href="#should-i">Should I...?</a></li>
+	<li><a href="#always-test-these">Always test these (in no specific order)</a></li>
+	<li><a href="#your-tests-should">Your tests should ...</a></li>
+	<li><a href="#important-things">Important things to remember</a></li>
+	<li><a href="#parting-message">A parting message</a></li>
+</ul>
 <div class="writing">
 
-	<h1>Intro</h1>
+	<h1 id="intro">Intro</h1>
 	<p>
 		At this point in time, I have been coding professionally for just about two years. I completed a coding bootcamp back in April 2018 - where as part of the syllabus we were taught how to test. Unit tests, mocking, etc. Since then I have encountered integration testing, and end-to-end (often referred to as E2E) testing. There are plenty of articles on the internet on <strong>how</strong> to do all these things, but I struggled to find resources that would help me to learn <strong>what</strong> to test. If you need short and sweet definitions of the terms used in this blog post, you will find <a href="https://medium.com/welldone-software/an-overview-of-javascript-testing-7ce7298b9870">Vitali Zaidman's post "Overview of JavaScript Testing in 2020"</a> helpful.
 
@@ -97,7 +109,7 @@
 		Many thanks to my interviewees: Alex Wilson, Matt Hinchliffe, James Wise, John Flockton, Nick Ramsbottom, and James Nicholls, as well as my beta-readers: Jennifer Shepherd and Tara Ojo and Nick Ramsbottom.  
 	</p>
 	
-	<h1>Should I ...?</h1>
+	<h1 id="should-i">Should I ...?</h1>
 
 	<div class="button-holder">
 		<button onclick="expandCategory(`should-i`)"><strong>Expand all "Should I"</strong></button>
@@ -246,7 +258,7 @@
 		<p class="details-block">Shout testing is a nickname for a lazy approach of "if I turn off this app and it affects someone, they will come and complain" (rather than asking around if someone is using the app in the first place). I would not do this deliberately because that means you know that there is a functionality you haven't tested and you're letting the user be the guinea pig. If this is about some obscure edge case, that maybe happens due to a race condition only present in certain circumstances, it is reasonable that you were not able to imagine this happening and shout testing is a valid way of exposing the bug. But if you do receive alerts via shout testing, make sure to write the test - you now know the circumstances and the steps to reproduce the bug, or at least what the undesirable behaviour that is occurring is - and patch the bug. </p>
 	</details>
 
-	<h1>Always test these (in no specific order)</h1>
+	<h1 id="always-test-these">Always test these (in no specific order)</h1>
 
 	<div class="button-holder">
 		<button onclick="expandCategory(`always-test-these`)"><strong>Expand all "Always test these"</strong></button>
@@ -331,7 +343,7 @@
 		<p class="details-block">In Object-Oriented Programming, a public method is one that can be accessed from anywhere, including outside the class where it's declared (private methods can only be used inside a class it's declared in). Your public methods are exposed for use by others and therefore you want to have the confidence that they do what you want them to do. </p>
 	</details>
 
-	<h1>
+	<h1 id="your-tests-should">
 		Your tests should ...
 	</h1>
 
@@ -369,7 +381,7 @@
 		... test what hurts or you think will hurt
 	</h3>
 
-	<h1>
+	<h1 id="important-things">
 		Important things to remember
 	</h1>
 

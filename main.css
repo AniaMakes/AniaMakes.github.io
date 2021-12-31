@@ -216,3 +216,10 @@ color:inherit;
 	justify-content: center;
 	margin-bottom: 20px;
 }
+
+.feedback {
+	font-size: 24px;
+	font-family: 'Milonga', cursive;
+	background-color: #bcbde0;
+	padding: 10px;
+}

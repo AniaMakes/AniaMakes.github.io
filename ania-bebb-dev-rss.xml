@@ -13,5 +13,12 @@
 			<pubDate>Wed, 29 Dec 2021 13:00:00 GMT</pubDate>
 			<description>I always struggle to remember how to export and import functions in JavaScript - the methods differ depending if your code gets transpiled, for example. I struggled to find a at-a-glance comparison, so I made my own - and compiled all sort of historical and background information to go with it.</description>
 		</item>
+		<item>
+			<title>Testing 201: What to test</title>
+			<link>https://ania.bebb.dev/testing-201</link>
+			<guid>https://ania.bebb.dev/testing-201</guid>
+			<pubDate>Thu, 06 Jan 2022 09:00:00 GMT</pubDate>
+			<description>Based on a series of interviews I conducted with my coworkers during Spring of 2020, this opinion piece combines the information obtained into a rough guide as to what should one test, and what approaches to take.</description>
+		</item>
 	</channel>
 </rss>

@@ -223,3 +223,8 @@ color:inherit;
 	background-color: #bcbde0;
 	padding: 10px;
 }
+
+.not-link {
+	text-decoration: none;
+	color: black
+}

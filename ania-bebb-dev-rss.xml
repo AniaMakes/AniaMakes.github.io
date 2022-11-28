@@ -20,5 +20,12 @@
 			<pubDate>Thu, 06 Jan 2022 09:00:00 GMT</pubDate>
 			<description>Based on a series of interviews I conducted with my coworkers during Spring of 2020, this opinion piece combines the information obtained into a rough guide as to what should one test, and what approaches to take.</description>
 		</item>
+		<item>
+			<title>I'll tell you what I want, what I really, really want</title>
+			<link>https://ania.bebb.dev/i-ll-tell-you-what-i-want</link>
+			<guid>https://ania.bebb.dev/i-ll-tell-you-what-i-want</guid>
+			<pubDate>Mon, 28 Nov 2022 20:00:00 GMT</pubDate>
+			<description>Giving negative feedback can be stressful. Giving useful feedback can sometimes feel impossible. It doesn't need to be! I will outline a handful of rules of thumb to follow that can help you put together clear feedback and get what you really, really want.</description>
+		</item>
 	</channel>
 </rss>

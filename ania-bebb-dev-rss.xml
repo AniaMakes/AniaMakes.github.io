@@ -27,5 +27,12 @@
 			<pubDate>Mon, 28 Nov 2022 20:00:00 GMT</pubDate>
 			<description>Giving negative feedback can be stressful. Giving useful feedback can sometimes feel impossible. It doesn't need to be! I will outline a handful of rules of thumb to follow that can help you put together clear feedback and get what you really, really want.</description>
 		</item>
+		<item>
+			<title>ffconf 2022 write-up and commentary</title>
+			<link>https://ania.bebb.dev/ffconf-2022</link>
+			<guid>https://ania.bebb.dev/ffconf-2022</guid>
+			<pubDate>Thu, 08 Dec 2022 21:30:00 GMT</pubDate>
+			<description>ffconf 2022 write-up and commentary.</description>
+		</item>
 	</channel>
 </rss>
